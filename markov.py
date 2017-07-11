@@ -44,21 +44,27 @@ def make_chains(text_string):
     chains = {}
 
     # your code goes here
-    #value_list = []
+    # iterating the string to get tuples to be set as keys and the following word
+    # to be set at its value.
     for i in range(len(text_string) - 2):
         key1 = (text_string[i], text_string[i + 1])
         value1 = i + 2
-        #chains[key1] = text_string[value1]
         # if the tuple key is not in dictionary, add key, value
         if key1 not in chains:
             chains[key1] = [text_string[value1]]
-        # if not, append to value list
+        # if in dictionary, append to value list
         else:
-            chains[key1].append(value1)
-            chains[key1] = text_string[value1]
+            chains[key1].append(text_string[value1])
+    # grab last two words in filestring ane make = to 1 tuple (-2, -1): {[None]}
+    last_key = (text_string[-2], text_string[-1])
+    # if in dictionary, append
+    if last_key in chains:
+        chains[last_key].append(None)
+    # if not, create
+    else:
+        chains[last_key] = [None]
     return chains
 
-# print make_chains("green-eggs.eend.txt")
 
 def make_text(chains):
     """Return text from chains."""
@@ -77,6 +83,8 @@ input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
 chains = make_chains(input_text)
+
+print chains
 
 # Produce random text
 random_text = make_text(chains)
