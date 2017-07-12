@@ -77,11 +77,21 @@ def make_text(chains):
     # access tuple, find value (rand choose), add to list
 
     while True:
-        variable = choice(chains[(words[-2], words[-1])])
-        if variable is None:
+        # key = (words[-2], words[-1]))
+        # possible_next = chains[key]
+        # next_word = chosie(possible_next)
+        next_word = choice(chains[(words[-2], words[-1])])
+        if next_word is None or (len(" ".join(words)) > 140):
+                                # and (
+                                # words[-1][-1] == "." or
+                                # words[-1][-1] == "?" or
+                                # words[-1][-1] == "!" or
+                                # words[-1][-1] == "\"" or
+                                # words[-1][-1] == ")" or
+                                # words[-1][-1] == "*")):
             break
         else:
-            words.append(variable)
+            words.append(next_word)
     return " ".join(words)
     # make (y, z)
     # search dictionary for y, z
@@ -89,7 +99,7 @@ def make_text(chains):
     # change list into string
 
 
-input_path = "green-eggs.txt"
+input_path = "brothers-grim.txt"
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
