@@ -72,8 +72,21 @@ def make_text(chains):
     words = []
 
     # your code goes here
+    # pull random word from dictionary, add to list
+    words.extend(choice(chains.keys()))
+    # access tuple, find value (rand choose), add to list
 
+    while True:
+        variable = choice(chains[(words[-2], words[-1])])
+        if variable is None:
+            break
+        else:
+            words.append(variable)
     return " ".join(words)
+    # make (y, z)
+    # search dictionary for y, z
+    # repeat until reach none.
+    # change list into string
 
 
 input_path = "green-eggs.txt"
@@ -83,8 +96,6 @@ input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
 chains = make_chains(input_text)
-
-print chains
 
 # Produce random text
 random_text = make_text(chains)
